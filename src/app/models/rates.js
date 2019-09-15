@@ -38,26 +38,13 @@ const ratesSchema = new mongoose.Schema({
 })
 
 ratesSchema.statics = {
-    upload: function(from, to){
-        var url = "https://api.exchangeratesapi.io/history?start_at=" + from + "&end_at=" + to + "&base=USD";
-        request.get(url, function(err, resp, body){
-            if(!err && resp.statusCode == 200){
-                console.log(body);
-                console.log(typeof(body));
-                var x = JSON.parse(body);
-                console.log(x['base']);
-            }
-        })
-    }
-}
-
-
-ratesSchema.methods = {
-    changeBase: function(newB){
-        var x = {
-            date: this.date,
-            PHP: this.PHP/this[newB]
-        }
+    gett: function(base, curr, from, to){
+        return this.find()
+            .where('date').gte(from).lte(to)
+            .select('date ' + base + ' ' + curr)
+            .sort('date')
+            .lean()
+            .exec()
     }
 }
 

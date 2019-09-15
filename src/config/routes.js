@@ -1,12 +1,12 @@
-var controllers = require('../app/controllers/cont');
+var controllers = require('../app/controllers/controllers');
 
 
 module.exports = function(app) {
-    app.get('/', function(req, res){
-        res.render('main.ejs')
-    })
-    app.get('/tt/:currency', controllers.fun2)
-    //app.get('/upl', cont.upload)
+    app.get('/', controllers.main)
+    
+    app.get('/a', controllers.chooseBase)
 
-    app.get('/a/:currency', controllers.chooseBase)
+    app.get('/a/:base', controllers.chooseCurr)
+
+    app.get('/a/:base/:curr', controllers.fun3)
 };

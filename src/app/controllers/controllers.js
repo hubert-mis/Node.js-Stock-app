@@ -2,54 +2,49 @@ const rates = require('../models/rates');
 const upl = require('../upload');
 const cron = require('../cron');
 
-exports.fun3 = function (req, res){
-    var d = new Date("2019-03-05");
-    rates.find({
-        date: {
-            $gte: new Date(2018, 03, 20)
-        }},
-        'EUR',
-        function(err, res){
-            console.log(res);
-        }
-    )
-    res.end('ABC');
-}
-
-exports.fun = function (req, res){
-    var d = new Date(2018, 07, 20)
-    var c = 'USD'
-
-    rates.find().where('date').gte(d).select(c).
-    exec(function(err, res){
-        console.log(res);
-    })
-    res.end('proba'); 
-}
-
-
-exports.fun2 = function(req, res){
-    var d = req.query.date;
-    var c = req.params.currency;
-    var xd = {};
-    xd['conditions'] = {};
-    xd['conditions']['date'] = d;
-    xd['projection'] = c;
-    xd['callback'] = function(err, res){
-        console.log(res);
-    };
-    console.log(xd);
-
-    rates.find(xd)
-    res.end('VV');
-    
-}
+var curs = ["USD", "EUR", "PLN", "GBP", "CHF", "CNY"];
 
 exports.upload = function(req, res){
     cron.xd();
     res.end("up");
 }
 
+exports.main = function(req, res){
+    res.render('main.ejs');
+}
+
 exports.chooseBase = function(req, res){
     res.render('chooseBase.ejs');
+}
+
+exports.chooseCurr = function(req, res){
+    var base = req.params.base;
+    var curr = curs.filter(function(val){
+        return val != base;
+    })
+
+    res.render('chooseCurr.ejs', {
+        base: base,
+        curr: curr
+    });
+}
+
+exports.fun3 = function(req, res){
+    base = req.params.base;
+    curr = req.params.curr;
+    from = req.query.from;
+    to = req.query.to;
+
+    rates.gett(base, curr, from, to)
+        .then(function(doc){
+            var xd = [];
+            for (let i = 0; i < doc.length; i++) {
+              var obj = doc[i];
+              var t = {};
+              t['date'] = obj['date'];
+              t[curr] = obj[curr] / obj[base];
+              xd.push(t);        
+            }
+            res.json(xd);
+        })  
 }
