@@ -8,5 +8,7 @@ module.exports = function(app) {
 
     app.get('/a/:base', controllers.chooseCurr)
 
-    app.get('/a/:base/:curr', controllers.fun3)
+    app.get('/a/:base/:curr', controllers.chooseRange)
+
+    app.get('/b/:base/:curr', controllers.showData)
 };

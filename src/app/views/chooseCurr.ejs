@@ -6,22 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Stock app</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
   <script src="script.js"></script>
 </head>
 <body>
   <div class="wrapper">
-    <header class="header"></header>
+    <header class="header">Aplikacja Node.js do podstawowej analizy statystycznej.</header>
     <aside class="sidebar">
       <ul class="nav">
         <li><a href="/">Strona główna</a></li>
         <li><a href="/a">Wybór waluty bazowej</a></li>
-
       </ul>
     </aside>
     <article class="content">
-        <% for(var i=1; i<=counter; i++)
-        %>
+      <ul>
+      <% for(var i=1; i<curr.length; i++){
+          %>
+          <li><a href="/a/<%= base %>/<%= curr[i] %>"><%= curr[i] %></a></li>
+          <% } %>        
+      %>
+      </ul>
     </article>
     <footer class="footer">
       <div>&copy; Copyright 2019 Hubert Miś</div>

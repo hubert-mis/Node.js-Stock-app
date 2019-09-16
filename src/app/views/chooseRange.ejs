@@ -6,22 +6,27 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Stock app</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../style.css">
   <script src="script.js"></script>
 </head>
 <body>
   <div class="wrapper">
-    <header class="header">Witaj! Ta aplikacja powstała w ramach pracy licencjackiej na Wydziale Zarządzania Akademii Górniczo-Hutniczej w Krakowie na kierunku Informatyka i Ekonometria. Jej tematyką jest wykorystanie środowiska Node.js w analizie danych.</header>
+    <header class="header">Aplikacja Node.js do podstawowej analizy statystycznej.</header>
     <aside class="sidebar">
       <ul class="nav">
         <li><a href="/">Strona główna</a></li>
         <li><a href="/a">Wybór waluty bazowej</a></li>
-
       </ul>
     </aside>
     <article class="content">
-      <li><a href="/a/EUR">EUR</a></li>
-  
+        <form action="/b/<%= base %>/<%= curr %>" method="GET">
+            Data początkowa<br>
+            <input type="date" name="from">
+            <br>Data końcowa<br>
+            <input type="date" name="to">
+            <br>Zatwierdź<br>
+            <input type="submit">
+        </form>
     </article>
     <footer class="footer">
       <div>&copy; Copyright 2019 Hubert Miś</div>

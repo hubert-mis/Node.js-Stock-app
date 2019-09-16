@@ -47,15 +47,25 @@ h1, p {
     padding: 8px 16px;
     text-decoration: none;
 }
-   
-.nav li a.active {
-    background-color: #4CAF50;
-    color: white;
-}
   
 .nav li a:hover:not(.active) {
     background-color: #555;
     color: white;
+}
+
+.content ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    text-align: left;
+}
+
+.content li a {
+    display: block;
+    color: #000;
+    padding: 4px 8px;
+    text-decoration: none;
 }
   
 @media screen and (min-width: 500px) {
@@ -63,7 +73,6 @@ h1, p {
     body{
         margin:20px;
     }
-    /* no grid support? */
     .sidebar {
         float: left;
         width: 19.1489%;

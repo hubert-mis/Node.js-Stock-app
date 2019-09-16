@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Stock app</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../style.css">
   <script src="script.js"></script>
 </head>
 <body>
@@ -15,16 +15,21 @@
     <aside class="sidebar">
       <ul class="nav">
         <li><a href="/">Strona główna</a></li>
+        <li><a href="/a">Wybór waluty bazowej</a></li>
+        <li><a href="/a<%= base %>">Wybór waluty analizowanej</a></li>
+        <li><a href="/a<%= base %>/<%= curr %>">Wybór zakresu czasu</a></li>
       </ul>
     </aside>
     <article class="content">
-      <ul>
-      <% for(var i=1; i<curr.length; i++){
-        %>
-        <li><a href="/a/<%= curr[i] %>"><%= curr[i] %></a></li>
-        <% } %>        
-    %>
-    </ul>
+        <p>Minimum: <%= stats.min %></p>
+        <p>1 kwartyl: <%= stats.q1 %></p>
+        <p>Średnia: <%= stats.mean %></p>
+        <p>Mediana: <%= stats.median %></p>
+        <p>3 kwartyl: <%= stats.q3 %></p>
+        <p>Maksimum: <%= stats.max %></p>
+        <p>P-value testu Shapiro-Wilka: <%= stats.shapiro %></p>
+
+
     </article>
     <footer class="footer">
       <div>&copy; Copyright 2019 Hubert Miś</div>

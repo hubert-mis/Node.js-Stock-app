@@ -1,20 +1,18 @@
 const rates = require('../models/rates');
 const upl = require('../upload');
 const cron = require('../cron');
+const math = require('../math');
 
 var curs = ["USD", "EUR", "PLN", "GBP", "CHF", "CNY"];
-
-exports.upload = function(req, res){
-    cron.xd();
-    res.end("up");
-}
 
 exports.main = function(req, res){
     res.render('main.ejs');
 }
 
 exports.chooseBase = function(req, res){
-    res.render('chooseBase.ejs');
+    res.render('chooseBase.ejs',{
+        curr: curs
+    });
 }
 
 exports.chooseCurr = function(req, res){
@@ -29,22 +27,37 @@ exports.chooseCurr = function(req, res){
     });
 }
 
-exports.fun3 = function(req, res){
+exports.chooseRange = function(req, res){
+    res.render('chooseRange.ejs', {
+        base: req.params.base,
+        curr: req.params.curr
+    })
+}
+
+exports.showData = function(req, res){
     base = req.params.base;
     curr = req.params.curr;
     from = req.query.from;
     to = req.query.to;
 
     rates.gett(base, curr, from, to)
-        .then(function(doc){
-            var xd = [];
-            for (let i = 0; i < doc.length; i++) {
-              var obj = doc[i];
-              var t = {};
-              t['date'] = obj['date'];
-              t[curr] = obj[curr] / obj[base];
-              xd.push(t);        
-            }
-            res.json(xd);
-        })  
+    .then(function(doc){
+        var vector = [];
+        for (let i = 0; i < doc.length; i++) {
+          var obj = doc[i];
+          var t = [];
+          t['date'] = obj['date'];
+          t[curr] = obj[curr] / obj[base];
+          vector.push(t);        
+        }
+        var stats = math.fun1(vector, curr);
+        res.render('showData.ejs', {
+            base: base,
+            curr: curr,
+            stats: stats
+        })
+    })  
 }
+
+
+
