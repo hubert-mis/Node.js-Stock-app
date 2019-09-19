@@ -1,37 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Stock app</title>
-
-  <link rel="stylesheet" href="../style.css">
-  <script src="script.js"></script>
-</head>
+  <% include include/head %>
 <body>
   <div class="wrapper">
-    <header class="header">Aplikacja Node.js do podstawowej analizy statystycznej.</header>
-    <aside class="sidebar">
+    <% include include/header %>
+    <aside>
       <ul class="nav">
         <li><a href="/">Strona główna</a></li>
         <li><a href="/a">Wybór waluty bazowej</a></li>
       </ul>
     </aside>
-    <article class="content">
+    <article>
       <ul>
-      <% for(var i=1; i<curr.length; i++){
+      <% for(var i=0; i<curr.length; i++){
           %>
           <li><a href="/a/<%= base %>/<%= curr[i] %>"><%= curr[i] %></a></li>
           <% } %>        
       %>
       </ul>
     </article>
-    <footer class="footer">
-      <div>&copy; Copyright 2019 Hubert Miś</div>
-      <div><a href="mailto:hubert.k.mis@gmail.com">hubert.k.mis@gmail.com</a></div>
-      <div><a href="https://github.com/hubertmis1">Github</a></div>
-    </footer>
+    <% include include/footer %>
   </div>
 </body>
 </html>

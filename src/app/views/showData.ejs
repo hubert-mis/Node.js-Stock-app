@@ -1,41 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Stock app</title>
-
-  <link rel="stylesheet" href="../../style.css">
-  <script src="script.js"></script>
-</head>
+  <% include include/head %>
 <body>
   <div class="wrapper">
-    <header class="header">Aplikacja Node.js do podstawowej analizy statystycznej.</header>
-    <aside class="sidebar">
+    <% include include/header %>
+    <aside>
       <ul class="nav">
         <li><a href="/">Strona główna</a></li>
         <li><a href="/a">Wybór waluty bazowej</a></li>
-        <li><a href="/a<%= base %>">Wybór waluty analizowanej</a></li>
-        <li><a href="/a<%= base %>/<%= curr %>">Wybór zakresu czasu</a></li>
+        <li><a href="/a/<%= base %>">Wybór waluty analizowanej</a></li>
+        <li><a href="/a/<%= base %>/<%= curr %>">Wybór zakresu czasu</a></li>
       </ul>
     </aside>
-    <article class="content">
-        <p>Minimum: <%= stats.min %></p>
-        <p>1 kwartyl: <%= stats.q1 %></p>
-        <p>Średnia: <%= stats.mean %></p>
-        <p>Mediana: <%= stats.median %></p>
-        <p>3 kwartyl: <%= stats.q3 %></p>
-        <p>Maksimum: <%= stats.max %></p>
-        <p>P-value testu Shapiro-Wilka: <%= stats.shapiro %></p>
-
-
+    <article>
+      <p>Minimum: <%= stats.min %></p>
+      <p>1 kwartyl: <%= stats.q1 %></p>
+      <p>Średnia: <%= stats.mean %></p>
+      <p>Mediana: <%= stats.median %></p>
+      <p>3 kwartyl: <%= stats.q3 %></p>
+      <p>Maksimum: <%= stats.max %></p>
+      <p>P-value testu Shapiro-Wilka: <%= stats.shapiro %></p>
     </article>
-    <footer class="footer">
-      <div>&copy; Copyright 2019 Hubert Miś</div>
-      <div><a href="mailto:hubert.k.mis@gmail.com">hubert.k.mis@gmail.com</a></div>
-      <div><a href="https://github.com/hubertmis1">Github</a></div>
-    </footer>
+    <% include include/footer %>
   </div>
 </body>
 </html>
